@@ -1,3 +1,1 @@
-Check out my personal site:
-
-www.theowu.me
+LIVE: [www.theowu.me]
