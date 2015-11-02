@@ -1,88 +1,81 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Welcome</title>
+		<title>Theodore Wu</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link href='https://fonts.googleapis.com/css?family=Work+Sans' rel='stylesheet' type='text/css'>
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
-	<body class="is-loading">
+	<body class="landing">
 
-		<!-- Wrapper -->
-			<div id="wrapper" style="background-color: transparent;">
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
 
-				<!-- Main -->
-					<section id="main">
-						<header>
-							<span class="avatar"><img src="images/avatar.jpg" alt="" /></span>
-							<br>
-							<h1 style="color:white">Theodore Wu</h1>
-							<p style="color:white; margin-top: -10px;">Software Developer</p>
-						</header>
-						<!--
-						<hr />
-						<h2>Extra Stuff!</h2>
-						<form method="post" action="#">
-							<div class="field">
-								<input type="text" name="name" id="name" placeholder="Name" />
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<img style="border-radius:50%" height="200px" width="200px" src="images/avatar.jpg"/>
+							<br><br>
+									<h2 style="font-family: 'Work Sans', sans-serif;">Theodore Wu</h2>
+							<p>Software Developer </p>
+						</div>
+						<a href="#two" class="more scrolly" style="text-transform:lowercase;">my portfolio</a>
+					</section>
+
+
+				<!-- Two -->
+					<section id="two" class="wrapper alt style2">
+						<section class="spotlight">
+							<div class="image"><img src="images/workspace.gif" alt="" /></div>
+							<div class="content">
+								<h2>Workspace</h2>
+								<p>A crowdsourcing platform that connects people to the best workspaces and cafes around. Workspaces are rated by wifi, outlets, and seating.</p>
+								<a href="https://www.github.com/tleewu/goworkspace">GITHUB</a>
+								&nbsp &nbsp &nbsp
+								<a href="https://www.gowork.space/">LIVE</a>
 							</div>
-							<div class="field">
-								<input type="email" name="email" id="email" placeholder="Email" />
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="images/tetris.gif" alt="" /></div><div class="content">
+								<h2>Tetris</h2>
+								<p>Bringing back a classic childhood favorite of mine!</p>
+								<a href="https://www.github.com/tleewu/tetris">GITHUB</a>
+								&nbsp &nbsp &nbsp
+								<a href="https://www.theowu.me/tetris">LIVE</a>
 							</div>
-							<div class="field">
-								<div class="select-wrapper">
-									<select name="department" id="department">
-										<option value="">Department</option>
-										<option value="sales">Sales</option>
-										<option value="tech">Tech Support</option>
-										<option value="null">/dev/null</option>
-									</select>
-								</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="images/chess.gif" alt="" /></div>
+							<div class="content">
+								<h2>Chess</h2>
+								<p>Play chess in the terminal with your friends or my custom built AI. More information in the link below. </p>
+								<a href="https://www.github.com/tleewu/chess">GITHUB</a>
 							</div>
-							<div class="field">
-								<textarea name="message" id="message" placeholder="Message" rows="4"></textarea>
-							</div>
-							<div class="field">
-								<input type="checkbox" id="human" name="human" /><label for="human">I'm a human</label>
-							</div>
-							<div class="field">
-								<label>But are you a robot?</label>
-								<input type="radio" id="robot_yes" name="robot" /><label for="robot_yes">Yes</label>
-								<input type="radio" id="robot_no" name="robot" /><label for="robot_no">No</label>
-							</div>
-							<ul class="actions">
-								<li><a href="#" class="button">Get Started</a></li>
-							</ul>
-						</form>
-						<hr />
-						-->
-						<footer>
-							<!-- <img height="40px" width="40px" style="position:relative; top:-5px;"
-									 src="https://wasin.io/wp-content/uploads/2015/05/showimage.png" />
-							<img height="50px" width="50px"
-									 src="https://cdn4.iconfinder.com/data/icons/black-icon-social-media/512/0995-linkedin-logo-square2.png" /> -->
-						</footer>
+						</section>
 					</section>
 
 				<!-- Footer -->
 					<footer id="footer">
-
+						<ul class="icons">
+							<li><a href="https://www.github.com/tleewu" class="icon fa-github"><span class="label">Github</span></a></li>
+							<li><a href="https://www.linkedin.com/pub/theodore-wu/83/b84/a6b" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="mailto: theowu93@gmail.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
 					</footer>
 
 			</div>
 
 		<!-- Scripts -->
-			<!--[if lte IE 8]><script src="assets/js/respond.min.js"></script><![endif]-->
-			<script>
-				if ('addEventListener' in window) {
-					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
-					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
-				}
-			</script>
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
 	</body>
 </html>
