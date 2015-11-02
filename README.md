@@ -1,1 +1,1 @@
-LIVE: [www.theowu.me]
+LIVE: [http://www.theowu.me]
