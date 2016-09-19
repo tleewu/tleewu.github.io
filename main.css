@@ -1,44 +1,55 @@
 body {
-  overflow: hidden;
-  margin: 0;
-  background-color: black;
+  padding: 125px 400px;
+  background-color: #ffffff;
+  text-align: center;
+  font-family: Lato;
+  font-weight: 300;
 }
 
 img {
-  height: 100%;
-  width: 100%;
-  opacity: 0.5;
+  height: 125px;
+  width: 125px;
+  border-radius: 50%;
+  border: 1px solid #e5e5e5;
+  margin-bottom:25px;
 }
 
-.name {
-  bottom: 50%;
-  font-family: 'Lato', sans-serif;
-  color: white;
-  font-size: 80px;
-  font-weight: 100;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  letter-spacing: 1px;
+.first {
+  font-size: 28px;
+  letter-spacing: -0.5px;
 }
 
-.body {
-  bottom: 45%;
-  font-family: 'Lato', sans-serif;
-  color: white;
-  font-size: 24px;
-  font-weight: 100;
-  position: absolute;
-  text-align: center;
-  width: 100%;
+.second {
+  line-height: 25px;
+  text-align: left;
+  margin-top: 20px;
+  font-size: 18px;
 }
 
 a {
-  color: white;
-  text-decoration: none;
-  margin-right: 10px;
+  font-weight: 500;
+  color: black;
+  text-decoration: underline;
 }
 
 a:hover {
-  color: #e6e6e6;
+  text-decoration: none;
+}
+
+footer {
+  margin-top: 100px;
+  text-transform: uppercase;
+}
+
+a.footer {
+  font-size: 14px;
+  font-weight: 300;
+  text-decoration: none;
+  color: #999999;
+  margin-right: 15px;
+  transition: all 0.3s;
+}
+
+a.footer:hover {
+  color: black;
 }
