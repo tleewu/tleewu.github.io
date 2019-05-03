@@ -3,9 +3,17 @@
     padding: 25px;
   }
 
-  footer {
-    margin-top: 50px;
+  .main-h1 {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    color: #000;
+    font-size: 8vh;
+    line-height: 10vh;
+    font-weight: 400;
   }
+
 }
 
 @media (min-width: 501px) {
@@ -13,8 +21,15 @@
     padding: 125px 200px;
   }
 
-  footer {
-    margin-top: 100px;
+  .main-h1 {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    color: #000;
+    font-size: 12vh;
+    line-height: 14vh;
+    font-weight: 400;
   }
 }
 
@@ -63,16 +78,7 @@ a.footer:hover {
   color: black;
 }
 
-.main-h1 {
-  position: relative;
-  margin-top: 5px;
-  margin-bottom: 0px;
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  color: #000;
-  font-size: 12vh;
-  line-height: 16vh;
-  font-weight: 400;
-}
+
 
 p {
   margin-bottom: 20px;
