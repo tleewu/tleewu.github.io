@@ -1,5 +1,8 @@
 import type { UserConfig } from '~/types'
 
+const FONT_STACK
+  = '"HiraMinProN-W6","Hiragino Mincho ProN","Yu Mincho",YuMincho,"Source Han Serif SC","Source Han Serif TC","Noto Serif CJK SC",serif'
+
 export const userConfig: Partial<UserConfig> = {
   site: {
     title: 'Theo Wu',
@@ -52,8 +55,15 @@ export const userConfig: Partial<UserConfig> = {
     ],
   },
   appearance: {
-    theme: 'system',
+    theme: 'light',
     locale: 'en-us',
+    fonts: {
+      // HiraMinProN-W6 is a macOS/iOS system font. The rest of the stack are
+      // the closest serifs available per-platform so non-Mac visitors get
+      // something similar without loading a webfont.
+      header: FONT_STACK,
+      ui: FONT_STACK,
+    },
   },
   seo: {
     twitter: '@theowu93',
