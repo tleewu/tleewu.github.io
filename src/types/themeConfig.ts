@@ -30,6 +30,10 @@ export interface ConfigSite {
   title: string
   subtitle: string
   author: string
+  /** Path to the avatar shown beside the site title in the header. */
+  avatar?: string
+  /** Optional hero block on the post-list home page. */
+  hero?: { title: string, description?: string }
   description: string
   website: string
   pageSize: number

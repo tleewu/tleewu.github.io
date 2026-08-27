@@ -18,29 +18,29 @@ export async function getStaticPaths() {
 const { posts, name } = Astro.props
 
 function getListItems(posts: Post[]) {
-  const result = posts.map((post) => ({
+  return posts.map((post) => ({
     title: post.data.title,
     href: `/posts/${post.id}/`,
-    date: formatDate(post.data.pubDate),
+    date: formatDate(post.data.pubDate, 'MMM D, YYYY'),
   }))
-  return result
 }
 ---
 
 <LayoutDefault>
-  <section>
-    <h2 class="post-title"># {name}</h2>
-    <ul class="pl-6 py-3" flex="~ col gap-4">
+  <div class="shell constrained">
+    <header class="post-header">
+      <h1>{name}</h1>
+    </header>
+
+    <ul class="list-plain" style="padding-bottom: var(--sp-40)">
       {
         getListItems(posts).map(({ title, href, date }) => (
-          <li>
-            <h3 class="post-title">
-              <a href={href}>{title}</a>
-            </h3>
+          <li class="list-row">
             <time>{date}</time>
+            <a href={href}>{title}</a>
           </li>
         ))
       }
     </ul>
-  </section>
+  </div>
 </LayoutDefault>

@@ -1,22 +1,582 @@
+/*
+ * Design ported from the Havi WordPress theme by Uladzimir Kulesh (GPL v2).
+ * https://wordpress.org/themes/havi/
+ *
+ * Tokens below are taken from Havi's theme.json rather than eyeballed, so the
+ * palette, type scale and spacing ramp match the original.
+ */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter/InterVariable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter/InterVariable-Italic.woff2') format('woff2');
+}
+
 :root {
-  --uno-colors-primary: theme('colors.primary');
-  --uno-colors-background: theme('colors.background');
-  --uno-fonts-ui: theme('fontFamily.ui');
-  --uno-colors-shadow: theme('colors.shadow');
+  /* Colour — Havi's base/contrast pair plus its opacity ladder. */
+  --base: rgb(255, 255, 255);
+  --contrast: rgb(4, 4, 6);
+  --contrast-2: rgba(4, 4, 6, 0.85);
+  --contrast-3: rgba(4, 4, 6, 0.45);
+  --contrast-4: rgba(4, 4, 6, 0.15);
+  --contrast-5: rgba(4, 4, 6, 0.1);
+  --contrast-6: rgba(4, 4, 6, 0.04);
+
+  /*
+   * Havi uses --contrast-3 for meta text, which lands at 3.3:1 on white and
+   * fails WCAG AA. --meta is nudged to 0.62 for 4.7:1 at the same hue.
+   */
+  --meta: rgba(4, 4, 6, 0.62);
+
+  /* Type */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --fw-text: 400;
+  --fw-heading: 500;
+  --lh: 1.5;
+  --ls-heading: -0.01em;
+
+  --fs-small: 0.875rem;
+  --fs-normal: 1rem;
+  --fs-medium: 1.125rem;
+  --fs-large: 1.3125rem;
+  --fs-x-large: 1.5rem;
+  --fs-xx-large: 1.875rem;
+  --fs-xxx-large: 2.25rem;
+
+  /* Layout */
+  --content: 600px;
+  --wide: 1200px;
+  --pad: clamp(1.5rem, 3vw, 3rem);
+  --gap: 1.5rem;
+  --sp-30: clamp(2.25rem, 0.9375vi + 2.0625rem, 3rem);
+  --sp-40: clamp(3rem, 1.875vi + 2.625rem, 4.5rem);
+  --sp-50: clamp(3.75rem, 2.8125vi + 3.1875rem, 6rem);
+  --sp-60: clamp(5.25rem, 4.6875vi + 4.3125rem, 9rem);
 }
+
+/* Minimal reset — replaces the one UnoCSS used to inject. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
-  --at-apply: antialiased;
-  --at-apply: 'bg-background c-primary font-ui text-shadow-color-shadow';
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 
-  text-shadow: 1px 1px 1px var(--uno-colors-shadow);
-  background-size: 7px 7px;
-  background-image: linear-gradient(to right, var(--uno-colors-shadow) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--uno-colors-shadow) 1px, transparent 1px);
+  /* Havi's Inter settings: single-storey g, optical size pinned at 30. */
+  font-feature-settings: 'cv10';
+  font-variation-settings: 'opsz' 30;
 }
 
-:where(a):not(.not-underline-hover) {
-  --at-apply: 'p-1.5px';
-  --at-apply: 'decoration-underline decoration-0.1em decoration-offset-2px';
-  --at-apply: 'ease-in-out duration-300ms';
-  --at-apply: 'hover:(c-background bg-primary decoration-primary)';
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--base);
+  color: var(--contrast-2);
+  font-family: var(--font-body);
+  font-size: var(--fs-normal);
+  font-weight: var(--fw-text);
+  line-height: var(--lh);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--contrast);
+  font-weight: var(--fw-heading);
+  letter-spacing: var(--ls-heading);
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--fs-xxx-large);
+  line-height: 1.11111;
+}
+h2 {
+  font-size: var(--fs-xx-large);
+  line-height: 1.2;
+}
+h3 {
+  font-size: var(--fs-x-large);
+  line-height: 1.33333;
+}
+h4 {
+  font-size: var(--fs-medium);
+  line-height: 1.33333;
+}
+
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+/* Havi's link signature: underlined at rest, underline removed on hover. */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition:
+    color 0.25s ease-in-out,
+    background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 1px solid var(--contrast);
+  outline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--contrast-6);
+  padding: 0.15em 0.35em;
+  border-radius: 0.25rem;
+}
+
+pre {
+  overflow-x: auto;
+  padding: var(--gap);
+  border-radius: 0.25rem;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: var(--fs-small);
+}
+
+/* ------------------------------------------------------------------ *
+ * Shell
+ * ------------------------------------------------------------------ */
+
+.shell {
+  width: 100%;
+  max-width: var(--wide);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.site-main {
+  flex: 1 0 auto;
+}
+
+/* Havi's single.html uses layout:constrained, which centres at contentSize. */
+.constrained {
+  max-width: var(--content);
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------ *
+ * Header
+ * ------------------------------------------------------------------ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--base);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding-block: var(--gap);
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 1.125rem;
+}
+
+.branding__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+
+.branding__name {
+  text-decoration: none;
+  color: var(--contrast);
+  font-weight: var(--fw-heading);
+  letter-spacing: var(--ls-heading);
+}
+
+.branding__name:hover {
+  color: var(--meta);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  flex-wrap: wrap;
+}
+
+.site-nav__links,
+.site-nav__social {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__links {
+  gap: 2.25rem;
+}
+
+.site-nav__social {
+  gap: 0.75rem;
+}
+
+.site-nav__links a {
+  text-decoration: none;
+}
+
+.site-nav__links a:hover {
+  color: var(--meta);
+}
+
+.site-nav__links a[aria-current='page'] {
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+}
+
+.site-nav__social a {
+  display: inline-flex;
+  color: var(--meta);
+  text-decoration: none;
+}
+
+.site-nav__social a:hover {
+  color: var(--contrast);
+}
+
+/* ------------------------------------------------------------------ *
+ * Footer
+ * ------------------------------------------------------------------ */
+
+.site-footer {
+  border-top: 1px solid var(--contrast-5);
+  margin-top: var(--sp-40);
+}
+
+.site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem var(--gap);
+  padding-block: var(--gap);
+  color: var(--meta);
+  font-size: var(--fs-small);
+}
+
+/* ------------------------------------------------------------------ *
+ * Home
+ * ------------------------------------------------------------------ */
+
+.hero {
+  padding-block: var(--sp-60) var(--sp-50);
+}
+
+.hero h1 {
+  font-size: clamp(2.25rem, 1.2rem + 3.2vw, 3.75rem);
+  line-height: 1.11111;
+}
+
+.hero p {
+  margin-top: var(--gap);
+  font-size: var(--fs-medium);
+  line-height: 1.33333;
+}
+
+/* ------------------------------------------------------------------ *
+ * Post list
+ * ------------------------------------------------------------------ */
+
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-30);
+}
+
+.entry__title {
+  font-size: var(--fs-medium);
+  line-height: 1.33333;
+}
+
+.entry__title a {
+  text-decoration: none;
+}
+
+.entry__title a:hover {
+  color: var(--meta);
+}
+
+.entry__excerpt {
+  margin-top: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ *
+ * Post meta
+ * ------------------------------------------------------------------ */
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.625em;
+  margin-top: 0.75rem;
+  color: var(--meta);
+  font-size: var(--fs-small);
+}
+
+.post-meta__dot {
+  font-size: 0.625rem;
+  color: var(--contrast-3);
+}
+
+.post-meta a {
+  color: inherit;
+}
+
+/* ------------------------------------------------------------------ *
+ * Post
+ * ------------------------------------------------------------------ */
+
+.post-header {
+  padding-block: var(--sp-50) var(--sp-30);
+}
+
+.post-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding-bottom: var(--sp-40);
+}
+
+.post-body > h2,
+.post-body > h3 {
+  margin-top: var(--sp-30);
+}
+
+.post-body h2 {
+  font-size: var(--fs-x-large);
+}
+.post-body h3 {
+  font-size: var(--fs-large);
+}
+
+.post-body ul,
+.post-body ol {
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-body blockquote {
+  margin: 0;
+  padding-left: var(--gap);
+  border-left: 1px solid var(--contrast-4);
+}
+
+/* max-width, not width — an explicit width on the tag must still win. */
+.post-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.post-body hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--contrast-4);
+  margin: var(--sp-30) 0;
+}
+
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.post-body th,
+.post-body td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--contrast-4);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+/* ------------------------------------------------------------------ *
+ * Archive / categories
+ * ------------------------------------------------------------------ */
+
+.page-header {
+  padding-block: var(--sp-50) var(--sp-30);
+}
+
+.list-plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.list-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.list-row time {
+  color: var(--meta);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+.year-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.year-group h2 {
+  font-size: var(--fs-large);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ *
+ * Pagination
+ * ------------------------------------------------------------------ */
+
+.pagination {
+  border-top: 1px solid var(--contrast-4);
+  margin-top: var(--sp-40);
+  margin-bottom: var(--sp-40);
+  padding-block: var(--gap);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  font-size: var(--fs-small);
+}
+
+.pagination__count {
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+
+.pagination__links {
+  display: flex;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------------ *
+ * Responsive
+ * ------------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .site-header {
+    position: static;
+  }
+
+  .site-header__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .site-nav {
+    gap: 1.25rem;
+  }
+
+  .site-nav__links {
+    gap: 1.25rem;
+  }
+
+  .hero {
+    padding-block: var(--sp-40) var(--sp-30);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Visually hidden but available to screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* On a single post the meta header carries the page title, not a list title. */
+.post-header .entry__title {
+  font-size: var(--fs-xxx-large);
+  line-height: 1.11111;
+}
+
+.post-header .post-meta {
+  margin-top: var(--gap);
 }

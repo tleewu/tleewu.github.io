@@ -5,7 +5,6 @@ import robotsTxt from 'astro-robots-txt'
 import { defineConfig } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
-import UnoCSS from 'unocss/astro'
 import devtoolsJson from 'vite-plugin-devtools-json'
 import { themeConfig } from './src/.config'
 
@@ -34,7 +33,6 @@ export default defineConfig({
     },
   },
   integrations: [
-    UnoCSS({ injectReset: true }),
     mdx({}),
     robotsTxt(),
     sitemap(),

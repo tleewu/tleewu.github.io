@@ -1,8 +1,5 @@
 import type { UserConfig } from '~/types'
 
-const FONT_STACK
-  = '"HiraMinProN-W6","Hiragino Mincho ProN","Yu Mincho",YuMincho,"Source Han Serif SC","Source Han Serif TC","Noto Serif CJK SC",serif'
-
 export const userConfig: Partial<UserConfig> = {
   site: {
     title: 'Theo Wu',
@@ -10,6 +7,12 @@ export const userConfig: Partial<UserConfig> = {
     author: 'Theo Wu',
     description: 'Notes and essays by Theo Wu.',
     website: 'https://www.theowu.me/',
+    avatar: '/profile.jpeg',
+    hero: {
+      title: 'Hello, I am Theo Wu',
+      description:
+        'Product manager. Previously a software engineer. I write things down here so they don\'t evaporate in notes apps and group chats.',
+    },
     pageSize: 8,
     socialLinks: [
       {
@@ -49,21 +52,13 @@ export const userConfig: Partial<UserConfig> = {
     ],
     categoryMap: [],
     footer: [
-      '© %year <a target="_blank" href="%website">%author</a>',
-      'Theme <a target="_blank" href="https://github.com/moeyua/astro-theme-typography">Typography</a> by <a target="_blank" href="https://moeyua.com">Moeyua</a>',
-      'Proudly published with <a target="_blank" href="https://astro.build/">Astro</a>',
+      '© %year %author',
+      'Design from <a target="_blank" href="https://wordpress.org/themes/havi/">Havi</a> by <a target="_blank" href="https://mroya.eu/">Uladzimir Kulesh</a> · Built with <a target="_blank" href="https://astro.build/">Astro</a>',
     ],
   },
   appearance: {
     theme: 'light',
     locale: 'en-us',
-    fonts: {
-      // HiraMinProN-W6 is a macOS/iOS system font. The rest of the stack are
-      // the closest serifs available per-platform so non-Mac visitors get
-      // something similar without loading a webfont.
-      header: FONT_STACK,
-      ui: FONT_STACK,
-    },
   },
   seo: {
     twitter: '@theowu93',

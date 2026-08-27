@@ -4,7 +4,7 @@ import Comments from '~/components/Comments.astro'
 import Pagination from '~/components/Pagination.astro'
 import SiteSeo from '~/components/SiteSeo.astro'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
-import LayoutPost from '~/layouts/LayoutPost.astro'
+import PostMeta from '~/components/PostMeta.astro'
 import { getPosts } from '~/utils'
 import { render } from 'astro:content'
 
@@ -35,21 +35,27 @@ function getUrl(id: string) {
 <LayoutDefault>
   <SiteSeo slot="seo" title={entry.data.title} desc={entry.data.description} banner={entry.data.banner} />
 
-  <LayoutPost post={entry}>
-    <Content />
-  </LayoutPost>
+  <div class="shell constrained">
+    <header class="post-header">
+      <PostMeta post={entry} asLink={false} />
+    </header>
 
-  <Pagination
-    showLeft={Boolean(prev)}
-    leftTitle={`${t('prev_post')}: ${prev?.data.title}`}
-    leftUrl={getUrl(prev?.id)}
-    showRight={Boolean(next)}
-    rightTitle={`${t('next_post')}: ${next?.data.title}`}
-    rightUrl={getUrl(next?.id)}
-    showPageCount={false}
-  />
-  <!-- BUG 这里使用 client:visible 会导致构建失败。ref: https://github.com/withastro/astro/issues/7329 -->
-  <Comments post={entry} />
+    <article class="post-body">
+      <Content />
+    </article>
+
+    <Pagination
+      showLeft={Boolean(prev)}
+      leftTitle={prev?.data.title}
+      leftUrl={prev ? getUrl(prev.id) : undefined}
+      showRight={Boolean(next)}
+      rightTitle={next?.data.title}
+      rightUrl={next ? getUrl(next.id) : undefined}
+      showPageCount={false}
+    />
+    <!-- BUG 这里使用 client:visible 会导致构建失败。ref: https://github.com/withastro/astro/issues/7329 -->
+    <Comments post={entry} />
+  </div>
 </LayoutDefault>
 
 <script>

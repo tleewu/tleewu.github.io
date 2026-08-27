@@ -1,6 +1,12 @@
 # theowu.me
 
-My personal site and blog. Built with [Astro](https://astro.build/) using the
+My personal site and blog. Built with [Astro](https://astro.build/), styled after the
+[Havi](https://wordpress.org/themes/havi/) WordPress theme by Uladzimir Kulesh (GPL v2).
+
+Havi is a WordPress block theme and can't run on GitHub Pages, so its design system —
+palette, type scale, spacing ramp, Inter — was ported out of its `theme.json` into
+plain CSS in `src/styles/global.css`. The Astro plumbing (content collections, RSS,
+sitemap, SEO) is what remains of the original
 [Typography](https://github.com/moeyua/astro-theme-typography) theme.
 
 **Live:** https://www.theowu.me
@@ -45,12 +51,21 @@ There's also a helper: `pnpm theme:create`.
 
 ## Site settings
 
-Everything configurable lives in `src/.config/user.ts` — title, subtitle, author,
-social links, nav links, locale, colors, and fonts. It's merged over
+Everything configurable lives in `src/.config/user.ts` — title, author, avatar, the
+home-page hero, social links, nav links, and footer. It's merged over
 `src/.config/default.ts`, so you only list what you want to change. Don't edit
 `default.ts` directly.
 
 The About page is `src/content/spec/about.md`.
+
+## Styling
+
+All of it is in `src/styles/global.css`, as CSS custom properties at the top —
+colors, type scale, spacing. There's no Tailwind/UnoCSS layer to learn; change a
+token and the whole site follows.
+
+Inter is self-hosted from `public/fonts/inter/` (SIL OFL), so there are no external
+font requests.
 
 ## Deploying
 

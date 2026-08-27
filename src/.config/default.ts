@@ -10,6 +10,7 @@ export const defaultConfig: ThemeConfig = {
     author: 'Moeyua',
     description: 'Rediscory the beauty of typography',
     website: 'https://astro-theme-typography.vercel.app/',
+    avatar: '',
     pageSize: 5,
     socialLinks: [
       {

@@ -1,28 +1,39 @@
 ---
 import { themeConfig } from '~/.config'
+import SocialIcon from '~/components/SocialIcon.astro'
 
 const { navLinks, socialLinks } = themeConfig.site
 const { translate: t } = Astro.locals
+
+// Trailing-slash-insensitive compare so /archive and /archive/ both match.
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/'
+
+function isCurrent(href: string) {
+  const target = href.replace(/\/+$/, '') || '/'
+  return target === path
+}
 ---
 
-<nav class="text-center font-bold" flex="~ col gap-4">
-  <ul lg="flex-col items-start text-4" class="text-3.5" flex="~ row gap-2 justify-center">
+<nav class="site-nav" aria-label="Primary">
+  <ul class="site-nav__links">
     {
       navLinks.map((nav) => (
         <li>
-          <a class="" href={nav.href}>
+          <a href={nav.href} aria-current={isCurrent(nav.href) ? 'page' : undefined}>
             {t(nav.name)}
           </a>
         </li>
       ))
     }
   </ul>
-  <ul flex="~ row gap-1 justify-center">
+
+  <ul class="site-nav__social">
     {
       socialLinks.map(({ href, name }) => (
         <li>
-          <a href={href} target="_blank" title={name} class="not-underline-hover inline-flex items-center">
-            <span class:list={[`i-mdi-${name}`, 'w-6 h-6']}>{name}</span>
+          <a href={href} title={name} rel="noopener" target={href.startsWith('http') ? '_blank' : undefined}>
+            <SocialIcon name={name} />
+            <span class="sr-only">{name}</span>
           </a>
         </li>
       ))

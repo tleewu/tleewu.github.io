@@ -5,21 +5,41 @@ import PostCategory from './PostCategory.astro'
 
 interface Props {
   post: Post
+  /** Post pages render the title as a plain heading; lists link it. */
+  asLink?: boolean
 }
 
-const { post } = Astro.props
-const { translate: t } = Astro.locals
-
+const { post, asLink = true } = Astro.props
 const categoryList = post.data.categories ?? []
+const date = post.data.modDate ?? post.data.pubDate
 ---
 
-<header flex="~ col gap-2">
-  <h1 class="post-title">
-    <a class="not-prose" href={`/posts/${post.id}/`}>{post.data.title}</a>
+<header>
+  <h1 class="entry__title">
+    {asLink ? <a href={`/posts/${post.id}/`}>{post.data.title}</a> : post.data.title}
   </h1>
-  <div class="text-3.5">
-    <span>{t(post.data.modDate ? 'updated_at' : 'posted_at')}</span>
-    <time>{formatDate(post.data.modDate ?? post.data.pubDate)}</time>
-    {categoryList.map((category) => <PostCategory category={category} />)}
+
+  <div class="post-meta">
+    {
+      categoryList.length > 0 && (
+        <span>
+          Published in{' '}
+          {categoryList.map((category, i) => (
+            <>
+              {i > 0 && ', '}
+              <PostCategory category={category} />
+            </>
+          ))}
+        </span>
+      )
+    }
+    {
+      categoryList.length > 0 && (
+        <span class="post-meta__dot" aria-hidden="true">
+          •
+        </span>
+      )
+    }
+    <time datetime={date.toISOString()}>{formatDate(date)}</time>
   </div>
 </header>

@@ -6,31 +6,28 @@ import { getCategories, getPathFromCategory } from '~/utils/index'
 const { translate: t } = Astro.locals
 const categoryMap = await getCategories()
 
-const list = getListFromMap(categoryMap)
-
-function getListFromMap(map: typeof categoryMap) {
-  return Array.from(map).map(([key, value]) => ({
-    title: key,
-    href: `/categories/${getPathFromCategory(key, themeConfig.site.categoryMap)}`,
-    size: t('categories_count', value.length),
-  }))
-}
+const list = Array.from(categoryMap).map(([key, value]) => ({
+  title: key,
+  href: `/categories/${getPathFromCategory(key, themeConfig.site.categoryMap)}`,
+  size: t('categories_count', value.length),
+}))
 ---
 
 <LayoutDefault>
-  <section>
-    <h2 class="post-title">{t('Categories')}</h2>
-    <ul class="pl-6" flex="~ col gap-4">
+  <div class="shell constrained">
+    <header class="post-header">
+      <h1>{t('Categories')}</h1>
+    </header>
+
+    <ul class="list-plain" style="padding-bottom: var(--sp-40)">
       {
         list.map(({ title, href, size }) => (
-          <li>
-            <h3 class="post-title">
-              <a href={href}># {title}</a>
-            </h3>
-            <p>{size}</p>
+          <li class="list-row">
+            <a href={href}>{title}</a>
+            <span class="pagination__count">{size}</span>
           </li>
         ))
       }
     </ul>
-  </section>
+  </div>
 </LayoutDefault>
